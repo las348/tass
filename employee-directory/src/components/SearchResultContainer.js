@@ -1,7 +1,5 @@
 import React from "react";
-// import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
-// import API from "./API";
 
 
 class SearchResultContainer extends React.Component {

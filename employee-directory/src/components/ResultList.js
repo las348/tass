@@ -1,7 +1,9 @@
 import React from "react";
+// import Moment from 'moment';
 import "../styles/table.css";
 
 function ResultList(props) {
+
     return (
         <div>        
                 <table className="table table-striped">
@@ -17,8 +19,8 @@ function ResultList(props) {
                     {props.results.map(item => (
                     <tbody key={item.email} >
                         <tr>
-                            <td>{item.picture.thumbnail} </td>
-                            <td>{item.name.first}{item.name.last}</td>
+                            <td><img src={item.picture.thumbnail} alt={item.name.first} /></td>
+                            <td>{item.name.first} {item.name.last}</td>
                             <td>{item.phone}</td>
                             <td>{item.email}</td>
                             <td>{item.dob.date}</td>
