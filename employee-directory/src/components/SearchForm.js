@@ -1,22 +1,18 @@
 import React from "react";
 import "../styles/search.css";
 
-function SearchForm(props) {
+function SearchForm({handleSearch}) {
 
     return (
         <form className="form-inline justify-content-center">
             <div className="form-group">
                 <input
-                    onChange={props.handleInputChange}
-                    value={props.search}
-                    name="search"
-                    type="text"
+                    onChange={event => handleSearch(event)}
+                    type="search"
                     className="form-control"
                     placeholder="Search"
                     id="search"
                 />
-                <button onClick={props.handleFormSubmit} className="btn btn-primary">
-                    Search </button>
             </div>
         </form>
     );

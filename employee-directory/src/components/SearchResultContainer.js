@@ -1,5 +1,6 @@
 import React from "react";
 import ResultList from "./ResultList";
+import SearchForm from "./SearchForm";
 
 
 class SearchResultContainer extends React.Component {
@@ -12,6 +13,21 @@ class SearchResultContainer extends React.Component {
         };
     }
 
+    handleSearch = event => {
+        const name = event.target.value;
+
+        const sortedName = this.state.results.filter(result => {
+            let item = Object.values(result).join("").toLowerCase();
+
+            return item.indexOf(name.toLowerCase());
+        })
+        this.setState({ results: sortedName });
+    }
+
+    handleResults = event => {
+
+    }
+
     componentDidMount() {
         fetch("https://randomuser.me/api/?results=10&nat=us")
             .then(res => res.json())
@@ -19,7 +35,7 @@ class SearchResultContainer extends React.Component {
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        results: result.results
+                        results: result.results,
                     });
                 },
                 (error) => {
@@ -34,11 +50,12 @@ class SearchResultContainer extends React.Component {
     render() {
         return (
             <div>
-              <ResultList results={this.state.results} />
+                <SearchForm handleSearch={this.handleSearch} />
+                <ResultList results={this.state.results} />
             </div>
-          );
-        }
-      }
+        );
+    }
+}
 
-      
+
 export default SearchResultContainer;
