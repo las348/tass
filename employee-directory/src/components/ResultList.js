@@ -5,18 +5,19 @@ import "../styles/table.css";
 function ResultList(props) {
 
     return (
-        <div>        
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>DOB</th>
-                        </tr>
-                    </thead>
-                    {props.results.map(item => (
+        <div>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th onClick={() => props.sort()}>Name
+                            </th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>DOB</th>
+                    </tr>
+                </thead>
+                {props.results.map(item => (
                     <tbody key={item.email} >
                         <tr>
                             <td><img src={item.picture.thumbnail} alt={item.name.first} /></td>
@@ -26,9 +27,9 @@ function ResultList(props) {
                             <td>{item.dob.date}</td>
                         </tr>
                     </tbody>
-                      ))}
-                </table>
-          
+                ))}
+            </table>
+
         </div>
     );
 }

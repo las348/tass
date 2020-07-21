@@ -9,11 +9,12 @@ class SearchResultContainer extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            results: []
+            results: [],
+            search: ""
         };
     }
 
-    handleSearch = event => {
+    handleInputChange = event => {
         const name = event.target.value;
 
         const sortedName = this.state.results.filter(result => {
@@ -24,12 +25,20 @@ class SearchResultContainer extends React.Component {
         this.setState({ results: sortedName });
     }
 
-    handleResults = event => {
+    handleFormSubmit = event => {
+        event.preventDefault();
+        return this.state.search;
+    };
 
+    handleSort = event => {
+       const sortResults = this.state.results.sort((a,b) => {
+       return a.name.last > b.name.first ? 1:-1;
+       });
+       this.setState({results:sortResults})
     }
 
     componentDidMount() {
-        fetch("https://randomuser.me/api/?results=10&nat=us")
+        fetch("https://randomuser.me/api/?results=50&nat=us")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -50,8 +59,10 @@ class SearchResultContainer extends React.Component {
     render() {
         return (
             <div>
-                <SearchForm handleSearch={this.handleSearch} />
-                <ResultList results={this.state.results} />
+                <SearchForm handleInputChange={this.handleInputChange} />
+                <ResultList results={this.state.results} 
+                sort = {this.handleSort}
+                />
             </div>
         );
     }
