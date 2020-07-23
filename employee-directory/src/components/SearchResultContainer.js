@@ -1,72 +1,93 @@
-import React from "react";
-import ResultList from "./ResultList";
-import SearchForm from "./SearchForm";
+import React, { useState, useEffect } from "react";
+import SearchResult from "./SearchResult";
+import SearchBar from "./SearchBar";
+import axios from "axios";
 
+function ResultContainer() {
+    const [users, setUsers] = useState([])
+    // const [sortOption, setSortOption] = useState("name");
+    const [filterOption, setFilterOption] = useState("");
+    const [filteredState, setFilteredState] = useState([]);
 
-class SearchResultContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            results: [],
-            search: ""
-        };
+    useEffect(() => {
+        loadUsers();
+    }, [])
+
+    const loadUsers = () => {
+        axios.get("https://randomuser.me/api/?results=200&nat=us")
+            .then(res => {
+                const employee = res.data.results
+                setUsers(employee)
+            });
     }
 
-    handleInputChange = event => {
-        const name = event.target.value;
+    // const handleSortChange = (event) => {
+    //     event.preventDefault();
+    //     const { name, value } = event.target;
+    //     console.log(value)
 
-        const sortedName = this.state.results.filter(result => {
-            let item = Object.values(result).join("").toLowerCase();
+    //     if (value === "age") {
+    //         setSortOption([
+    //             ...sortOption,
 
-            return item.indexOf(name.toLowerCase());
-        })
-        this.setState({ results: sortedName });
-    }
+    //             users.sort(function (a, b) {
+    //                 return a.dob.age - b.dob.age
+    //             })
+    //         ])
+    //     }
+    // }
 
-    handleFormSubmit = event => {
+    const handleFilterChange = (event) => {
         event.preventDefault();
-        return this.state.search;
-    };
+        const { name, value } = event.target;
+        setFilterOption(
+            {
+                ...filterOption,
+                [name]: value
+            }
+        )
+        console.log(value)
 
-    handleSort = event => {
-       const sortResults = this.state.results.sort((a,b) => {
-       return a.name.last > b.name.first ? 1:-1;
-       });
-       this.setState({results:sortResults})
+
+        for (let i = 0; i < users.length; i++) {
+            if (value === users[i].name.first.toLowerCase() || value === users[i].name.last.toLowerCase()) {
+                setFilteredState([
+
+                    ...filteredState,
+                    users[i]
+                ])
+                console.log("Found employee")
+            }
+            else if (value === "") {
+
+                setFilteredState([])
+                console.log("Employee not found")
+            }
+        }
     }
 
-    componentDidMount() {
-        fetch("https://randomuser.me/api/?results=50&nat=us")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        results: result.results,
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-    }
 
-    render() {
-        return (
-            <div>
-                <SearchForm handleInputChange={this.handleInputChange} />
-                <ResultList results={this.state.results} 
-                sort = {this.handleSort}
-                />
+    return (
+        <>
+            <div id="container" className="container-fluid">
+                <div className="row">
+                    <div id="searchRow" className="col-12">
+                        <SearchBar
+                            // handleSortChange={handleSortChange}
+                            handleFilterChange={handleFilterChange}
+                        />
+                    </div>
+                </div>
+                <div id="tableRow" className="row">
+                    <div className="col-12">
+                        <SearchResult
+                            users={filteredState.length > 0 ? filteredState : users}
+                        />
+                    </div>
+                </div>
             </div>
-        );
-    }
+        </>
+    )
 }
 
-
-export default SearchResultContainer;
+export default ResultContainer;

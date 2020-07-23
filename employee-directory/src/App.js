@@ -2,6 +2,7 @@ import React from "react";
 import Jumbotron from "./components/jumbotron";
 import SearchResultContainer from "./components/SearchResultContainer";
 
+
 function App() {
   return (
     <div>
