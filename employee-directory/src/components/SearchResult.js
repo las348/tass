@@ -2,7 +2,7 @@ import React from 'react'
 
 function TableData(props) {
     const { users } = props;
-
+    const { handleSort } = props;
 
     return (
         <div>
@@ -12,7 +12,7 @@ function TableData(props) {
                         <thead >
                             <tr>
                                 <th>Picture</th>
-                                <th>Name</th>
+                                <th onClick={handleSort}>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Age</th>
