@@ -8,8 +8,8 @@ function ResultContainer() {
     const [users, setUsers] = useState([]);
     const [filterOption, setFilterOption] = useState("");
     const [filteredState, setFilteredState] = useState([]);
-    // const [sortBy, setSortBy] = useState({key: null, order: '>' });
-   
+    // const [sortBy, setSortBy] = useState({});
+
 
     useEffect(() => {
         loadUsers();
@@ -24,66 +24,102 @@ function ResultContainer() {
             });
     }
 
+    // const headings = [
+    //     { name: "Image", order: "descend" },
+    //     { name: "Name", order: "descend" },
+    //     { name: "Phone Number", order: "descend" },
+    //     { name: "Email", order: "descend" },
+    //     { name: "Age", order: "descend" }
+    // ]
 
-// function handleSort() {
-//     sortBy.sort(function(a,b){
-//         if (a.name.last > b.name.last) {
-//             return -1;
-//         }
-//         if (b.name.last > a.name.last) {
-//             return 1;
-//         }
-//         return 0;
-//     })
-//     setSortBy(users);
-// }
+    // const handleSort = (headings) => {
 
-const handleFilterChange = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    setFilterOption(
-        {
-            ...filterOption,
-            [name]: value
-        }
-    )
-    console.log(value)
+    //     if (currentOrder === "descend") {
+    //         currentOrder = "ascend";
+    //     } else {
+    //         currentOrder = "descend";
+    //     }
 
-    for (let i = 0; i < users.length; i++) {
-        if (value === users[i].name.first.toLowerCase() || value === users[i].name.last.toLowerCase()
-            || value === users[i].name.first || value === users[i].name.last) {
-            setFilteredState([...filteredState, users[i]
-            ])
-            console.log("Found employee")
-        }
-        else if (value === "") {
-            setFilteredState([])
-            console.log("Employee not found")
+    //     const compareFnc = (a, b) => {
+    //         if (currentOrder === "ascend") {
+    //             if (a[headings] === undefined) {
+    //                 return 1;
+    //             } else if (b[headings] === undefined) {
+    //                 return -1;
+    //             }
+    //             else if (heading === "name") {
+    //                 return a[headings].localeCompare(b[headings]);
+    //             } else {
+    //                 return a[headings] - b[headings];
+    //             }
+    //         } else {
+    //             if (a[headings] === undefined) {
+    //                 return 1;
+    //             } else if (b.heading === undefined) {
+    //                 return -1;
+    //             }
+
+    //             else if (headings === "name") {
+    //                 return b[headings].localeCompare(a[headings]);
+    //             } else {
+    //                 return b[headings] - a[headings];
+    //             }
+    //         }
+    //     }
+    //     const sortedUsers = sortBy.sort(compareFnc);
+
+    //     setSortBy(
+    //         sortedUsers
+    //     );
+    // };
+
+
+    const handleFilterChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        setFilterOption(
+            {
+                ...filterOption,
+                [name]: value
+            }
+        )
+        console.log(value)
+
+        for (let i = 0; i < users.length; i++) {
+            if (value === users[i].name.first.toLowerCase() || value === users[i].name.last.toLowerCase()
+                || value === users[i].name.first || value === users[i].name.last) {
+                setFilteredState([...filteredState, users[i]
+                ])
+                console.log("Found employee")
+            }
+            else if (value === "") {
+                setFilteredState([])
+                console.log("Employee not found")
+            }
         }
     }
-}
 
-return (
-    <>
-        <div id="container" className="container-fluid">
-            <div className="row">
-                <div id="searchRow" className="col-12">
-                    <SearchBar
-                        handleFilterChange={handleFilterChange}
-                    />
+    return (
+        <>
+            <div id="container" className="container-fluid">
+                <div className="row">
+                    <div id="searchRow" className="col-12">
+                        <SearchBar
+                            handleFilterChange={handleFilterChange}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div id="tableRow" className="row">
-                <div className="col-12">
-                    <SearchResult
-                        users={filteredState.length > 0 ? filteredState : users}
+                <div id="tableRow" className="row">
+                    <div className="col-12">
+                        <SearchResult
+                            users={filteredState.length > 0 ? filteredState : users}
                         // handleSort={handleSort}
-                    />
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    </>
-)
+        </>
+    )
 }
 
 export default ResultContainer;

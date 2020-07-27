@@ -5,6 +5,7 @@ function SearchUser(props) {
   const { handleFilterChange } = props;
 
   return (
+    
     <div id="searchForm" className="row justify-content-center">
 
       <div className="form-inline input-group-sm mb-3">
