@@ -8,11 +8,11 @@ function ResultContainer() {
     const [users, setUsers] = useState([]);
     const [filterOption, setFilterOption] = useState("");
     const [filteredState, setFilteredState] = useState([]);
-    const [sortBy, setSortBy] = useState({
-        users: [],
-        order: "descend",
-        filteredUsers: []
-    });
+    // const [sortBy, setSortBy] = useState({
+    //     users: [],
+    //     order: "descend",
+    //     filteredUsers: []
+    // });
 
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function ResultContainer() {
                 const employee = res.data.results
                 console.log(employee);
                 setUsers(employee)
-                setSortBy(employee)
+                // setSortBy(employee)
             });
     }
 
@@ -39,47 +39,47 @@ function ResultContainer() {
 
    
 
-    const handleSort = (heading) => {
+    // const handleSort = (heading) => {
 
-        if ((sortBy.order) === "descend") {
-            setSortBy({...sortBy, order: "ascend"});
-        } else {
-            setSortBy({...sortBy, order: "descend"});
-        }
+    //     if ((sortBy.order) === "descend") {
+    //         setSortBy({...sortBy, order: "ascend"});
+    //     } else {
+    //         setSortBy({...sortBy, order: "descend"});
+    //     }
 
-        const compareFnc = (a, b) => {
-            if ((sortBy.order) === "ascend") {
-                if (a[heading] === undefined) {
-                    return 1;
-                } else if (b[heading] === undefined) {
-                    return -1;
-                }
-                else if (heading === "name") {
-                    return a[heading].first.localeCompare(b[heading].first);
-                } else {
-                    return a[heading] - b[heading];
-                }
-            } else {
-                if (a[heading] === undefined) {
-                    return 1;
-                } else if (b.heading === undefined) {
-                    return -1;
-                }
+    //     const compareFnc = (a, b) => {
+    //         if ((sortBy.order) === "ascend") {
+    //             if (a[heading] === undefined) {
+    //                 return 1;
+    //             } else if (b[heading] === undefined) {
+    //                 return -1;
+    //             }
+    //             else if (heading === "name") {
+    //                 return a[heading].first.localeCompare(b[heading].first);
+    //             } else {
+    //                 return a[heading] - b[heading];
+    //             }
+    //         } else {
+    //             if (a[heading] === undefined) {
+    //                 return 1;
+    //             } else if (b.heading === undefined) {
+    //                 return -1;
+    //             }
 
-                else if (heading === "name") {
-                    return b[heading].first.localeCompare(a[heading].first);
-                } else {
-                    return b[heading] - a[heading];
-                }
-            }
-        }
-        const sortedUsers = (sortBy.filteredUsers).sort(compareFnc);
+    //             else if (heading === "name") {
+    //                 return b[heading].first.localeCompare(a[heading].first);
+    //             } else {
+    //                 return b[heading] - a[heading];
+    //             }
+    //         }
+    //     }
+    //     const sortedUsers = (sortBy.filteredUsers).sort(compareFnc);
 
-        setSortBy({
-          ...sortBy, 
-          filteredUsers: sortedUsers
-        });
-    };
+    //     setSortBy({
+    //       ...sortBy, 
+    //       filteredUsers: sortedUsers
+    //     });
+    // };
 
 
     const handleFilterChange = (event) => {
@@ -107,6 +107,7 @@ function ResultContainer() {
         }
     }
 
+
     return (
         <>
             <div id="container" className="container-fluid">
@@ -121,7 +122,7 @@ function ResultContainer() {
                     <div className="col-12">
                         <SearchResult
                             users={filteredState.length > 0 ? filteredState : users}
-                            handleSort={handleSort}
+                            // handleSort={handleSort}
                             // users={filteredUsers}
                             // headings={headings}
                             picture={headings[0].name}

@@ -2,12 +2,12 @@ import React from 'react'
 import "./../styles/table.css"
 
 
-function TableData(props, handlesort) {
+function TableData(props) {
     const { users, picture, name, phone, email, age } = props;
 
-    // const message = () => {
-    //     alert("Sorry, sorting is not currently available")
-    // }
+    const message = () => {
+        alert("Sorry, sorting is not currently available")
+    }
 
     return (
         <div>
@@ -17,7 +17,7 @@ function TableData(props, handlesort) {
                         <thead >
                             <tr>
                                 <th>{picture}</th>
-                                <th onClick={handlesort} id="name">{name}</th>
+                                <th onClick={message} id="name">{name}</th>
                                 <th>{phone}</th>
                                 <th>{email}</th>
                                 <th>{age}</th>
