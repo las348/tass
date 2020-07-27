@@ -2,12 +2,12 @@ import React from 'react'
 import "./../styles/table.css"
 
 
-function TableData(props) {
-    const { users } = props;
+function TableData(props, handlesort) {
+    const { users, picture, name, phone, email, age } = props;
 
-    const message = () => {
-        alert("Sorry, sorting is not currently available")
-    }
+    // const message = () => {
+    //     alert("Sorry, sorting is not currently available")
+    // }
 
     return (
         <div>
@@ -16,11 +16,11 @@ function TableData(props) {
                     <table className="table">
                         <thead >
                             <tr>
-                                <th>Picture</th>
-                                <th onClick={message} id="name">Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Age</th>
+                                <th>{picture}</th>
+                                <th onClick={handlesort} id="name">{name}</th>
+                                <th>{phone}</th>
+                                <th>{email}</th>
+                                <th>{age}</th>
                             </tr>
                         </thead>
                         <tbody>

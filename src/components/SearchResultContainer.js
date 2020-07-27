@@ -8,7 +8,11 @@ function ResultContainer() {
     const [users, setUsers] = useState([]);
     const [filterOption, setFilterOption] = useState("");
     const [filteredState, setFilteredState] = useState([]);
-    // const [sortBy, setSortBy] = useState({});
+    const [sortBy, setSortBy] = useState({
+        users: [],
+        order: "descend",
+        filteredUsers: []
+    });
 
 
     useEffect(() => {
@@ -21,57 +25,61 @@ function ResultContainer() {
                 const employee = res.data.results
                 console.log(employee);
                 setUsers(employee)
+                setSortBy(employee)
             });
     }
 
-    // const headings = [
-    //     { name: "Image", order: "descend" },
-    //     { name: "Name", order: "descend" },
-    //     { name: "Phone Number", order: "descend" },
-    //     { name: "Email", order: "descend" },
-    //     { name: "Age", order: "descend" }
-    // ]
+    const headings = [
+        { name: "Picture", width: "10%", order: "descend" },
+        { name: "Name", width: "10%", order: "descend" },
+        { name: "Phone Number", width: "20%", order: "descend" },
+        { name: "Email", width: "20%", order: "descend" },
+        { name: "Age", width: "10%", order: "descend" }
+    ]
 
-    // const handleSort = (headings) => {
+   
 
-    //     if (currentOrder === "descend") {
-    //         currentOrder = "ascend";
-    //     } else {
-    //         currentOrder = "descend";
-    //     }
+    const handleSort = (heading) => {
 
-    //     const compareFnc = (a, b) => {
-    //         if (currentOrder === "ascend") {
-    //             if (a[headings] === undefined) {
-    //                 return 1;
-    //             } else if (b[headings] === undefined) {
-    //                 return -1;
-    //             }
-    //             else if (heading === "name") {
-    //                 return a[headings].localeCompare(b[headings]);
-    //             } else {
-    //                 return a[headings] - b[headings];
-    //             }
-    //         } else {
-    //             if (a[headings] === undefined) {
-    //                 return 1;
-    //             } else if (b.heading === undefined) {
-    //                 return -1;
-    //             }
+        if ((sortBy.order) === "descend") {
+            setSortBy({...sortBy, order: "ascend"});
+        } else {
+            setSortBy({...sortBy, order: "descend"});
+        }
 
-    //             else if (headings === "name") {
-    //                 return b[headings].localeCompare(a[headings]);
-    //             } else {
-    //                 return b[headings] - a[headings];
-    //             }
-    //         }
-    //     }
-    //     const sortedUsers = sortBy.sort(compareFnc);
+        const compareFnc = (a, b) => {
+            if ((sortBy.order) === "ascend") {
+                if (a[heading] === undefined) {
+                    return 1;
+                } else if (b[heading] === undefined) {
+                    return -1;
+                }
+                else if (heading === "name") {
+                    return a[heading].first.localeCompare(b[heading].first);
+                } else {
+                    return a[heading] - b[heading];
+                }
+            } else {
+                if (a[heading] === undefined) {
+                    return 1;
+                } else if (b.heading === undefined) {
+                    return -1;
+                }
 
-    //     setSortBy(
-    //         sortedUsers
-    //     );
-    // };
+                else if (heading === "name") {
+                    return b[heading].first.localeCompare(a[heading].first);
+                } else {
+                    return b[heading] - a[heading];
+                }
+            }
+        }
+        const sortedUsers = (sortBy.filteredUsers).sort(compareFnc);
+
+        setSortBy({
+          ...sortBy, 
+          filteredUsers: sortedUsers
+        });
+    };
 
 
     const handleFilterChange = (event) => {
@@ -113,7 +121,15 @@ function ResultContainer() {
                     <div className="col-12">
                         <SearchResult
                             users={filteredState.length > 0 ? filteredState : users}
-                        // handleSort={handleSort}
+                            handleSort={handleSort}
+                            // users={filteredUsers}
+                            // headings={headings}
+                            picture={headings[0].name}
+                            name={headings[1].name}
+                            phone={headings[2].name}
+                            email={headings[3].name}
+                            age={headings[4].name}
+                            headings={headings}
                         />
                     </div>
                 </div>
@@ -123,3 +139,4 @@ function ResultContainer() {
 }
 
 export default ResultContainer;
+
