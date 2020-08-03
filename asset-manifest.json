@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tass/static/css/main.b53c170d.chunk.css",
+    "main.js": "/tass/static/js/main.53b00dce.chunk.js",
+    "main.js.map": "/tass/static/js/main.53b00dce.chunk.js.map",
+    "runtime-main.js": "/tass/static/js/runtime-main.2c605151.js",
+    "runtime-main.js.map": "/tass/static/js/runtime-main.2c605151.js.map",
+    "static/js/2.1d442fd9.chunk.js": "/tass/static/js/2.1d442fd9.chunk.js",
+    "static/js/2.1d442fd9.chunk.js.map": "/tass/static/js/2.1d442fd9.chunk.js.map",
+    "index.html": "/tass/index.html",
+    "precache-manifest.78c08d1e196d542356db61c7ef11cb2d.js": "/tass/precache-manifest.78c08d1e196d542356db61c7ef11cb2d.js",
+    "service-worker.js": "/tass/service-worker.js",
+    "static/css/main.b53c170d.chunk.css.map": "/tass/static/css/main.b53c170d.chunk.css.map",
+    "static/js/2.1d442fd9.chunk.js.LICENSE.txt": "/tass/static/js/2.1d442fd9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c605151.js",
+    "static/js/2.1d442fd9.chunk.js",
+    "static/css/main.b53c170d.chunk.css",
+    "static/js/main.53b00dce.chunk.js"
+  ]
+}
