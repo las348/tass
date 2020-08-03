@@ -2,7 +2,7 @@ import React from 'react'
 import "./../styles/table.css"
 
 
-function TableData(props) {
+function TableData(props, handleSort) {
     const { users, picture, name, phone, email, age } = props;
 
     const message = () => {
@@ -14,10 +14,10 @@ function TableData(props) {
             <div className="row justify-content-center table">
                 <div className="col-md-8">
                     <table className="table">
-                        <thead >
+                        <thead>
                             <tr>
                                 <th>{picture}</th>
-                                <th onClick={message} id="name">{name}</th>
+                                <th id="name"><a onClick={() => props.handleSort()}>{name}</a></th>
                                 <th>{phone}</th>
                                 <th>{email}</th>
                                 <th>{age}</th>
@@ -26,7 +26,7 @@ function TableData(props) {
                         <tbody>
                             {users.map((user, index) => (<tr key={index}>
                                 <td><img alt={user.name.first} src={user.picture.thumbnail} className="img-fluid" /></td>
-                                <td>{user.name.first} {user.name.last}</td>                              
+                                <td>{user.name.first} {user.name.last}</td>
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.dob.age}</td>
