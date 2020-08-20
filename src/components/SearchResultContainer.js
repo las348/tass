@@ -5,15 +5,15 @@ import axios from "axios";
 
 
 function ResultContainer() {
-    const [users, setUsers] = useState({
-        users: [],
-        order: "descend",
-        filteredUsers: []
-    });
+    // const [users, setUsers] = useState({
+    //     users: [],
+    //     order: "descend",
+    //     filteredUsers: []
+    // });
+    const [users, setUsers] = useState([])
     const [filterOption, setFilterOption] = useState("");
     const [filteredState, setFilteredState] = useState([]);
     
-
 
     useEffect(() => {
         loadUsers();
@@ -24,8 +24,7 @@ function ResultContainer() {
             .then(res => {
                 const employee = res.data.results
                 console.log(employee);
-                setUsers(employee)
-               
+                setUsers(employee)   
             });
     }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import "./../styles/table.css"
 
 
-function TableData(props, handleSort) {
+function TableData(props) {
     const { users, picture, name, phone, email, age } = props;
 
     const message = () => {
@@ -17,7 +17,8 @@ function TableData(props, handleSort) {
                         <thead>
                             <tr>
                                 <th>{picture}</th>
-                                <th id="name"><a onClick={() => props.handleSort()}>{name}</a></th>
+                                <th id="name" onClick={message}>{name}</th>
+                                {/* <th>{name}</th> */}
                                 <th>{phone}</th>
                                 <th>{email}</th>
                                 <th>{age}</th>
